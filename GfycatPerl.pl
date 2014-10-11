@@ -8,6 +8,7 @@ foreach (@urls){
         my $post_url = qq{http://upload.gfycat.com/transcode?fetchUrl=$_};
         my $user_a = LWP::UserAgent->new(agent => "Perl");
         my $res = $user_a->post($post_url);
+        die "Error!" unless $res->is_success;
         my $json_res = $res->{_content};
         my $parsed = parse_json ($json_res);
         foreach (keys %$parsed){
